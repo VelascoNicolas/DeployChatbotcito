@@ -1,0 +1,1642 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Danielbot",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "host": "api-danielbot-mern-two.vercel.app",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Enterprise",
+      "description": "/enterprises/"
+    },
+    {
+      "name": "Profile",
+      "description": "/profiles/"
+    },
+    {
+      "name": "Client",
+      "description": "/clients/"
+    },
+    {
+      "name": "Message",
+      "description": "/messages/"
+    },
+    {
+      "name": "Flow",
+      "description": "/flows/"
+    },
+    {
+      "name": "PricingPlans",
+      "description": "/plans/"
+    },
+    {
+      "name": "Generic",
+      "description": "Rutas genéricas"
+    }
+  ],
+  "schemes": "https",
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "🆘 Poner el prefijo 'Bearer'. Ej: Bearer 1cabj"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/authenticated": {
+      "post": {
+        "tags": [
+          "Authenticated"
+        ],
+        "description": "A partir del token, retorna si es válido o no",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Authenticated"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/enterprises/getEnterpriseWithPricingPlan/{idEnterprise}": {
+      "get": {
+        "tags": [
+          "Enterprise"
+        ],
+        "description": "Devuelve la empresa con la relación PricingPlan",
+        "parameters": [
+          {
+            "name": "idEnterprise",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/enterprises/update/{idEnterprise}": {
+      "patch": {
+        "tags": [
+          "Enterprise"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "idEnterprise",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EnterprisesUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/enterprise/{idEnterprise}": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "Devuelve los flujos a los que la empresa puede acceder debido a su plan de precios",
+        "parameters": [
+          {
+            "name": "idEnterprise",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/forPricingPlan/{planId}": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "Devuelve los flujos de un plan especificado",
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/create": {
+      "post": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Flows"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/update/{id}": {
+      "patch": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Flows"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/getAllWithMessages": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/getAll": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "Esta ruta trae todos los flujos con sus mensajes y submensajes relacionados, incluyendo los submensajes hijos.",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/getOne/{id}": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "Esta ruta trae un flujo específico, sus mensajes relacionados y los submensajes hasta los hijos de los submensajes.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/flows/softDelete/{id}": {
+      "delete": {
+        "tags": [
+          "Flow"
+        ],
+        "description": "Realiza un borrado lógico de un flujo específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID del flujo a eliminar"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/getAllWithFlow": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/create/": {
+      "post": {
+        "tags": [
+          "Message"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Messages"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/getMessageAllDeleted": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/getMessageAllDeleted/{id}": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/findAllMessagesByNumOrder": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "idFlow",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Id de flow"
+          },
+          {
+            "name": "numOrder",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Número de orden del mensaje"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/findAllMessagesByNumOrderAndFlowByName": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "nameFlow",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Nombre del flow"
+          },
+          {
+            "name": "numOrder",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Número de orden del mensaje"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/AllWithChildren": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "description": "Esta ruta trae todos los mensajes junto con sus submensajes y sus respectivos submensajes hijos.",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/getOneWithChildren/{id}": {
+      "get": {
+        "tags": [
+          "Message"
+        ],
+        "description": "Esta ruta trae un mensaje específico y sus submensajes, incluyendo los submensajes hijos.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/update/{id}": {
+      "put": {
+        "tags": [
+          "Message"
+        ],
+        "description": "Esta ruta actualiza un mensaje específico junto con sus detalles. Se puede actualizar la relación con flow y enterprise si es necesario.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/softDelete/{id}": {
+      "delete": {
+        "tags": [
+          "Message"
+        ],
+        "description": "Realiza un borrado lógico de un Mensaje específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID del mensaje a eliminar"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profiles/signUpWithUser": {
+      "post": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Esta ruta permite registrar un profile y una empresa en el mismo endpoit",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignUp"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/profiles/signUp": {
+      "post": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Esta ruta es la que utilizará el administrador para crear perfiles en su empresa",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Profiles"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profiles/signIn": {
+      "post": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Retorna el token del profile",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/profiles/allProfiles": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Retorna los perfiles asociados a la empresa obtenida desde el token",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profiles/getById/{id}": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Busca el perfil por el id y lo retorna siempre y cuando esté asociado a la empresa obtenida desde el token",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profiles/deleteProfile/{id}": {
+      "delete": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Eliminación física del profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profiles/logicDeleteProfile/{id}": {
+      "patch": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Eliminación lógica del profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profiles/updateProfile/{id}": {
+      "patch": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Actualización del profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Profiles"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profiles/updateRoleProfile/{id}": {
+      "patch": {
+        "tags": [
+          "Profile"
+        ],
+        "description": "Actualización del rol del profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "admin",
+                    "redactor",
+                    "empleado"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/session/getSession": {
+      "get": {
+        "tags": [
+          "Session"
+        ],
+        "description": "Obtiene la sesión actual del usuario.",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/session/refreshSession": {
+      "post": {
+        "tags": [
+          "Session"
+        ],
+        "description": "Refresca la sesión del usuario utilizando el token de actualización.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "refresh_token": {
+                  "type": "string",
+                  "example": "String"
+                }
+              },
+              "required": [
+                "token",
+                "refresh_token"
+              ]
+            },
+            "description": "Cuerpo de la solicitud con el token de autenticación y el token de actualización"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subMessages/getAll": {
+      "get": {
+        "tags": [
+          "SubMessage"
+        ],
+        "description": "Esta ruta trae todos los submensajes registrados en el sistema.",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/subMessages/getOne/{id}": {
+      "get": {
+        "tags": [
+          "SubMessage"
+        ],
+        "description": "Esta ruta obtiene un submensaje específico por su ID, incluyendo su mensaje padre y sus submensajes hijos si los tiene.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/subMessages/create/{id}": {
+      "post": {
+        "tags": [
+          "SubMessage"
+        ],
+        "description": "Esta ruta crea un nuevo submensaje y lo asocia con el mensaje especificado por ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/subMessages/update/{id}": {
+      "put": {
+        "tags": [
+          "SubMessage"
+        ],
+        "description": "Esta ruta actualiza un submensaje específico, permitiendo modificar sus datos y la relación con su mensaje padre.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/subMessages/softDelete/{id}": {
+      "delete": {
+        "tags": [
+          "SubMessage"
+        ],
+        "description": "Realiza un borrado lógico de un SubMensaje específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID de un sub mensaje a eliminar"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/subMessages/recover/{id}": {
+      "put": {
+        "tags": [
+          "SubMessage"
+        ],
+        "description": "Recupera un SubMensaje previamente eliminado lógicamente, cambiando su estado a no eliminado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID del sub mensaje a recuperar"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/{entidad}/": {
+      "get": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Obtener todos los registros de la entidad",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "enterprises",
+              "clients",
+              "messages",
+              "flows",
+              "plans"
+            ]
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número de página.",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Crear una nueva entidad",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "enterprises",
+              "clients",
+              "plans"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "✅ Utilizar el body correspondiente a la entidad elegida ✅",
+            "schema": {
+              "$ref": "#/definitions/Generics"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/{entidad}/getAllDeleted/": {
+      "get": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Obtener todos los registros con baja lógica de la entidad",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "enterprises",
+              "clients",
+              "messages",
+              "flows",
+              "plans"
+            ]
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número de página.",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/{entidad}/{id}": {
+      "get": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Obtener entidad por su id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "enterprises",
+              "clients",
+              "messages",
+              "flows",
+              "plans"
+            ]
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID de la entidad"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Actualizar una entidad por su id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "clients",
+              "messages",
+              "plans"
+            ]
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID de la entidad"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "✅ Utilizar el body correspondiente a la entidad elegida ✅",
+            "schema": {
+              "$ref": "#/definitions/Generics"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Eliminació por id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "enterprises",
+              "clients",
+              "messages",
+              "flows",
+              "plans"
+            ]
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID de la entidad"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/{entidad}/logicDelete/{id}": {
+      "delete": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Eliminación lógica una entidad por su id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "enterprises",
+              "clients",
+              "messages",
+              "flows",
+              "plans"
+            ]
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID de la entidad"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/{entidad}/restore/{id}": {
+      "patch": {
+        "tags": [
+          "Generic"
+        ],
+        "summary": "Restaurar una entidad eliminada lógicamente por su id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "enterprises",
+              "clients",
+              "messages",
+              "flows",
+              "plans"
+            ]
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID de la entidad"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Enterprises": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Enterprise name"
+        },
+        "phone": {
+          "type": "number",
+          "example": 2612140198
+        },
+        "connected": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "Profiles": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "Pepe Argento"
+        },
+        "password": {
+          "type": "string",
+          "example": "contraseña"
+        },
+        "email": {
+          "type": "string",
+          "example": "example@example.com"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "admin",
+            "redactor",
+            "empleado"
+          ]
+        }
+      }
+    },
+    "ProfileResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "token": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Clients": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "Pepe Argento"
+        },
+        "phone": {
+          "type": "number",
+          "example": 2612140198
+        }
+      }
+    },
+    "Messages": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string",
+          "example": "Hola, cómo estás?"
+        },
+        "flow": {
+          "type": "string",
+          "example": "5ba7f8bf-544e-4d95-8b8b-aaeaef427d6e"
+        },
+        "numOrder": {
+          "type": "number",
+          "example": 2
+        }
+      }
+    },
+    "Flows": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Flow inicial"
+        },
+        "description": {
+          "type": "string",
+          "example": "flow de bienvenida con dos mensajes"
+        },
+        "pricingPlans": {
+          "type": "array",
+          "example": [
+            "5ba7f8bf-544e-4d95-8b8b-aaeaef427d6e",
+            "5ba7f8bf-544e-4d95-8b8b-aaeaef427d6e"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PricingPlans": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Free"
+        },
+        "description": {
+          "type": "string",
+          "example": "Free plan $0"
+        },
+        "price": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "SignUp": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        },
+        "phone": {
+          "type": "number",
+          "example": 26121164
+        },
+        "password": {
+          "type": "string",
+          "example": "example"
+        },
+        "name": {
+          "type": "string",
+          "example": "Enterprise name"
+        },
+        "username": {
+          "type": "string",
+          "example": "Pepe"
+        }
+      }
+    },
+    "SignIn": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "example"
+        }
+      }
+    },
+    "Authenticated": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "fwfowfkr302490..."
+        }
+      }
+    },
+    "EnterprisesUpdate": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "number",
+          "example": 26121164
+        },
+        "name": {
+          "type": "string",
+          "example": "Enterprise name"
+        },
+        "pricingPlan": {
+          "type": "string",
+          "example": "4a7cd21b-6a89-4bb1-8c47-e90a2ba1907a"
+        },
+        "connected": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "Generics": {
+      "type": "object",
+      "properties": {
+        "Enterprises": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Enterprise name"
+            },
+            "phone": {
+              "type": "number",
+              "example": 2612140198
+            },
+            "connected": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        },
+        "Clients": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "example": "Pepe Argento"
+            },
+            "phone": {
+              "type": "number",
+              "example": 2612140198
+            }
+          }
+        },
+        "Messages": {
+          "type": "object",
+          "properties": {
+            "body": {
+              "type": "string",
+              "example": "Hola, cómo estás?"
+            },
+            "numOrder": {
+              "type": "number",
+              "example": 2
+            }
+          }
+        },
+        "PricingPlans": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Free"
+            },
+            "description": {
+              "type": "string",
+              "example": "Free plan $0"
+            },
+            "price": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        }
+      }
+    }
+  }
+}
