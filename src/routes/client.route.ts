@@ -1,6 +1,7 @@
 import { genericRoutes } from "../types/routeGenerics";
-import { Client, ClientDTO } from "../entities";
+import { Client } from "../entities";
 import { ClientSchema } from "../schemas";
+import { ClientDTO } from "../entities/client/dtos/client.dto";
 //import { ClientController } from "../controllers/client.controller";
 // import { Router } from "express";
 

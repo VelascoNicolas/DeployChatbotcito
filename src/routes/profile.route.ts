@@ -1,11 +1,12 @@
 import { genericRoutes } from "../types/routeGenerics";
-import { Profile, ProfileDTO } from "../entities";
+import { Profile } from "../entities";
 import { ProfileController } from "../controllers/profile.controller";
 import { ProfileSchema, AuthSchema, EnterpriseSchema } from "../schemas";
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { validateSchema } from "../middlewares";
 import { checkRoleAuth } from "../middlewares/roleProtectionMiddleware";
 import { RoleSchema } from "../schemas/role.schema";
+import { ProfileDTO } from "../entities/agent/dtos/profile.dto";
 
 export const profileRouter = () => {
   const profileRoutes = genericRoutes(
