@@ -1,4 +1,4 @@
-//import "reflect-metadata";
+import "reflect-metadata";
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { AppDataSource } from "./data-source";
