@@ -41,6 +41,7 @@
 		"typescript": "5.3.3"
 	},
 	"dependencies": {
+		"@nestjs/typeorm": "^10.0.2",
 		"@supabase/supabase-js": "2.42.5",
 		"@types/bcryptjs": "2.4.6",
 		"@types/jsonwebtoken": "9.0.5",
