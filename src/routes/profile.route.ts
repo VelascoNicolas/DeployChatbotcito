@@ -5,8 +5,8 @@ import { authMiddleware } from "../middlewares/authMiddleware";
 import { validateSchema } from "../middlewares";
 import { checkRoleAuth } from "../middlewares/roleProtectionMiddleware";
 import { RoleSchema } from "../schemas/role.schema";
-import { ProfileDTO } from "../entities/agent/dtos/profile.dto";
-import { Profile } from "../entities/agent/profile.model";
+import { ProfileDTO } from "../entities/profile/dtos/profile.dto";
+import { Profile } from "../entities/profile/profile.model";
 
 export const profileRouter = () => {
   const profileRoutes = genericRoutes(

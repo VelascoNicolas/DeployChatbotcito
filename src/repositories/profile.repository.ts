@@ -1,5 +1,5 @@
 import { Profile, Enterprise } from "../entities";
-import { ProfileDTO, ProfileAndEnterpriseDTO } from "../entities/agent";
+import { ProfileDTO, ProfileAndEnterpriseDTO } from "../entities/profile";
 import { CustomError } from "../types";
 import { GenericRepository } from "../types/repositoryGenerics";
 import { EnterpriseRepository } from "./enterprise.repository";

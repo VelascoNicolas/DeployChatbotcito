@@ -2,7 +2,7 @@ import {
   Profile,
   ProfileAndEnterpriseDTO,
   ProfileDTO,
-} from "../entities/agent";
+} from "../entities/profile";
 import { GenericController } from "../types/controllerGenerics";
 import { ProfileRepository } from "../repositories/profile.repository";
 import { handleErrors } from "../utils";
@@ -69,6 +69,7 @@ export class ProfileController extends GenericController<Profile, ProfileDTO> {
       );
       return res.status(200).json(profiles);
     } catch (error: unknown) {
+      console.log(error)
       return handleErrors(error, res);
     }
   }

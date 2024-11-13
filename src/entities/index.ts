@@ -7,5 +7,5 @@ export * from "./flow/flow.model";
 export * from "./pricingPlan/pricingPlan.model";
 export * from "./example/example.model";
 export * from "./subMessage/subMessage.model";
-export * from "./agent/profile.model";
+export * from "./profile/profile.model";
 

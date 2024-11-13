@@ -1,6 +1,6 @@
 import { Entity, Column, OneToMany, ManyToOne } from "typeorm";
 import { Base } from "../base/base.model";
-import { Profile } from "../agent/profile.model";
+import { Profile } from "../profile/profile.model";
 import { Client } from "../client/client.model";
 import { Message } from "../message/message.model";
 import { PricingPlan } from "../pricingPlan/pricingPlan.model";
