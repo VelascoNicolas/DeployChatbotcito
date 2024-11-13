@@ -7,6 +7,7 @@ import { toEntityFromDto } from "../utils";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 import { handleRepositoryError } from "./errorHandler";
 import { supabase, supabaseAdmin } from "../configSupabaseClient";
+import { supabase2 } from "../configSupabaseClient";
 import { AuthApiError } from "@supabase/supabase-js";
 import { Role } from "../enums/role.enum";
 import { SessionRepository } from "./session.repository";
@@ -176,8 +177,32 @@ export class ProfileRepository extends GenericRepository<Profile> {
     }
   }
 
+  public async checkDatabase() {
+    try {
+      const { data, error } = await supabase2.rpc("list_schemas");
+  
+      if (error) {
+        console.error("Error checking database:", error);
+        // Handle the error (e.g., exit the application)
+        process.exit(1);
+      } else {
+        console.log("Database exists!");
+        console.log(data)
+        // Proceed with your application logic
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      process.exit(1);
+    }
+  }
+
   public async findAllProfiles(idEnterprise: string) {
     try {
+      const hola = true;
+      if(hola){
+        return await this.checkDatabase();
+      }
+      
       const profiles = await this.find({
         where: { enterprise: { id: idEnterprise } },
         relations: ["enterprise"],
