@@ -8,8 +8,8 @@ dotenv.config();
 export const dbConfig: TypeOrmModuleOptions = {
   type: (process.env.DB_TYPE as DatabaseType) || "postgres",
   url: process.env.DB_URL || "sqlite:memory",
-  entities: [__dirname + '/../**/*.entity.ts'],
-  synchronize: true, 
+  entities: Object.values(Entities),
+  synchronize: false, 
   subscribers: [],
   migrations: [],
 };
