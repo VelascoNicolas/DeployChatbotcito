@@ -178,20 +178,12 @@ export class ProfileRepository extends GenericRepository<Profile> {
 
   public async findAllProfiles(idEnterprise: string) {
     try {
-      const hola = true;
       const profiles = await this.find({
         where: { enterprise: { id: idEnterprise } },
-        relations: ["enterprise"],
       });
-      if(!hola) {
-        return `estoy funcionando en profiles y = ${profiles.length}`
-      }
       const profileData = await Promise.all(
         
         profiles.map(async (profile) => {
-          if(hola) {
-            return `estoy funcionando en la promes y = `
-          }
           const { data, error } = await supabaseAdmin.auth.admin.getUserById(
             profile.id
           );
