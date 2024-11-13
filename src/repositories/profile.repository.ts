@@ -204,7 +204,7 @@ export class ProfileRepository extends GenericRepository<Profile> {
             email: data.user?.email,
             role: data.user?.role,
             createdAt: data.user?.created_at,
-            enterprise: profile.enterprise,
+            enterpriseId: profile.enterprise.id,
           };
         })
       );
