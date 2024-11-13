@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { DatabaseType } from "typeorm";
+//import { DatabaseType } from "typeorm";
 //import * as Entities from "./entities";  // Asegúrate de importar todas las entidades correctamente
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
@@ -13,15 +13,22 @@ import {Example} from "./entities/example/example.model";
 import {SubMessage} from "./entities/subMessage/subMessage.model";
 import { Profile } from "./entities/profile/profile.model";
 
+
 dotenv.config();
 
 export const dbConfig: TypeOrmModuleOptions = {
-  type: (process.env.DB_TYPE as DatabaseType) || "postgres",
-  url: process.env.DB_URL || "sqlite:memory",
+  type: "postgres",
+  host: 'ep-sweet-thunder-a43jcrun-pooler.us-east-1.aws.neon.tech',
+  port: 5432,
+  username: 'default',
+  password: '9NXUEgliP1QM',
+  database: 'verceldb',
+  ssl: true,
   //entities: Object.values(Entities),
   entities: [Profile, Base, Client, Enterprise, Message, Flow, PricingPlan, Example, SubMessage],
-  synchronize: false, 
-  logging: false,
+  autoLoadEntities: true,
+  synchronize: true,
+  logging: true,
 };
 
 export const limit = 20;  // Límite de items devueltos por página
