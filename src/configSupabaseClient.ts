@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 export const supabase = createClient(
-  process.env.SUPABASE_DB_URL_AUTH ||
+  process.env.DB_URL ||
     "https://trdnrlxhjyifsuwaqiey.supabase.co",
   process.env.SUPABASE_DB_KEY || ""
 );
