@@ -20,6 +20,7 @@ export const dbConfig: TypeOrmModuleOptions = {
   //entities: Object.values(Entities),
   entities: [Profile, Base, Client, Enterprise, Message, Flow, PricingPlan, Example, SubMessage],
   synchronize: false, 
+  logging: false,
   subscribers: [],
   migrations: [],
 };
