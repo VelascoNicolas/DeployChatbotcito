@@ -180,38 +180,31 @@ export class ProfileRepository extends GenericRepository<Profile> {
     try {
       const profiles = await this.find({
         where: { enterprise: { id: idEnterprise } },
+        relations: ["enterprise"],
       });
       const profileData = await Promise.all(
         
         profiles.map(async (profile) => {
-          try {
-            const { data, error } = await supabaseAdmin.auth.admin.getUserById(
-              profile.id
+          const { data, error } = await supabaseAdmin.auth.admin.getUserById(
+            profile.id
+          );
+
+          
+
+          if (error instanceof AuthApiError) {
+            throw new CustomError(
+              "Error fetching profile: " + error.message,
+              error.status
             );
-  
-            if (error) {
-              throw new CustomError(
-                "Error fetching profile: " + error.message,
-                error.status ?? 500
-              );
-            }
-  
-            return {
-              id: profile.id,
-              username: data.user?.user_metadata.username,
-              email: data.user?.email,
-              role: data.user?.role,
-              createdAt: data.user?.created_at,
-              enterpriseId: profile.enterprise.id,
-            };
-          } catch (error) {
-            // Handle other errors here (e.g., network errors)
-            if (error instanceof Error) {
-              throw new CustomError("Unknown error: " + error.message, 500);
-            } else {
-              throw new CustomError("Unknown error", 500);
-            }
           }
+          return {
+            id: profile.id,
+            username: data.user?.user_metadata.username,
+            email: data.user?.email,
+            role: data.user?.role,
+            createdAt: data.user?.created_at,
+            enterpriseId: profile.enterprise.id,
+          };
         })
       );
 
