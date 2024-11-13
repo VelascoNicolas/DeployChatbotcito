@@ -21,8 +21,7 @@ export const dbConfig: TypeOrmModuleOptions = {
   entities: [Profile, Base, Client, Enterprise, Message, Flow, PricingPlan, Example, SubMessage],
   synchronize: false, 
   logging: false,
-  subscribers: [],
-  migrations: [],
+  autoLoadEntities: true
 };
 
 export const limit = 20;  // Límite de items devueltos por página
