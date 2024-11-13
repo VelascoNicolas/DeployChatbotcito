@@ -183,7 +183,7 @@ export class ProfileRepository extends GenericRepository<Profile> {
         where: { enterprise: { id: idEnterprise } },
         relations: ["enterprise"],
       });
-      if(hola) {
+      if(!hola) {
         return `estoy funcionando en profiles y = ${profiles.length}`
       }
       const profileData = await Promise.all(
