@@ -183,7 +183,7 @@ export class ProfileRepository extends GenericRepository<Profile> {
         where: { enterprise: { id: idEnterprise } },
         relations: ["enterprise"],
       });
-      if(!hola) {
+      if(hola) {
         return `estoy funcionando en profiles y = ${profiles.length}`
       }
       const profileData = await Promise.all(
@@ -191,6 +191,10 @@ export class ProfileRepository extends GenericRepository<Profile> {
           const { data, error } = await supabaseAdmin.auth.admin.getUserById(
             profile.id
           );
+
+          if(hola) {
+            return `estoy funcionando en la promes y = ${data.user?.email}`
+          }
 
           if (error instanceof AuthApiError) {
             throw new CustomError(
