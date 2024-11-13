@@ -182,7 +182,7 @@ export class ProfileRepository extends GenericRepository<Profile> {
         where: { enterprise: { id: idEnterprise } },
         relations: ["enterprise"],
       });
-
+      console.log(`estoy funcionando en profiles y = ${profiles.length}`)
       const profileData = await Promise.all(
         profiles.map(async (profile) => {
           const { data, error } = await supabaseAdmin.auth.admin.getUserById(
