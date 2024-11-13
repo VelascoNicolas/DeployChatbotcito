@@ -3,8 +3,9 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { AppDataSource } from "./data-source";
 import * as Routes from "./routes/index";
-import swaggerUi, { SwaggerUiOptions } from "swagger-ui-express";
 import swaggerFile from "./docs/swagger-output.json";
+import { SwaggerUiOptions } from "./docs/swaggerUiOptions";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 
@@ -50,7 +51,7 @@ const swaggerConfig: SwaggerUiOptions = {
 };
 
 app.get("/docs", swaggerUi.setup(swaggerFile, swaggerConfig));
-app.get("/docs", swaggerUi.setup(swaggerFile));
+
 
 
 // Middleware para manejar rutas no encontradas
