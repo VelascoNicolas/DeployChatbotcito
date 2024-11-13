@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { DatabaseType } from "typeorm";
 //import * as Entities from "./entities";  // Asegúrate de importar todas las entidades correctamente
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
-import {Profile} from "./entities/agent/profile.model";
+
 import {Base} from "./entities/base/base.model";
 import {Client} from "./entities/client/client.model";
 import {Enterprise} from "./entities/enterprise/enterprise.model";
@@ -11,6 +11,7 @@ import {Flow} from "./entities/flow/flow.model";
 import {PricingPlan} from "./entities/pricingPlan/pricingPlan.model";
 import {Example} from "./entities/example/example.model";
 import {SubMessage} from "./entities/subMessage/subMessage.model";
+import { Profile } from "./entities/profile/profile.model";
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ export const dbConfig: TypeOrmModuleOptions = {
   url: process.env.DB_URL || "sqlite:memory",
   //entities: Object.values(Entities),
   entities: [Profile, Base, Client, Enterprise, Message, Flow, PricingPlan, Example, SubMessage],
-  synchronize: false, 
+  synchronize: true, 
   logging: false,
   autoLoadEntities: true
 };
