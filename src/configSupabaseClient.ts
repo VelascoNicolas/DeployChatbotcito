@@ -7,7 +7,7 @@ export const supabase = createClient(
 );
 
 export const supabaseAdmin = createClient(
-  process.env.DB_URL ||
+  process.env.SUPABASE_DB_URL_AUTH ||
     "https://trdnrlxhjyifsuwaqiey.supabase.co",
   process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   {

@@ -14,7 +14,8 @@ export const authMiddleware = async (
     next();
   } catch (error: unknown) {
     if (error instanceof CustomError) {
-      res.status(error.status).json({ error: true, message: error.message });
+      next();
+      //res.status(error.status).json({ error: true, message: error.message });
     } else {
       res.status(500).json({
         error: true,
