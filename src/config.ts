@@ -18,12 +18,12 @@ dotenv.config();
 
 export const dbConfig: TypeOrmModuleOptions = {
   type: "postgres",
-  host: 'ep-sweet-thunder-a43jcrun-pooler.us-east-1.aws.neon.tech',
-  port: 5432,
-  username: 'default',
-  password: '9NXUEgliP1QM',
-  database: 'verceldb',
-  ssl: true,
+  host: 'aws-0-us-east-1.pooler.supabase.com',
+  port: 6543,
+  username: 'postgres.anapyveidygsxlolyuhe',
+  password: 'Chatbotcito',
+  database: 'postgres',
+  ssl: false,
   //entities: Object.values(Entities),
   entities: [Profile, Base, Client, Enterprise, Message, Flow, PricingPlan, Example, SubMessage],
   autoLoadEntities: true,

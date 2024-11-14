@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "description": ""
   },
-  "host": "localhost:3001",
+  "host": "localhost:3000",
   "basePath": "/api/v1",
   "tags": [
     {
@@ -37,7 +37,7 @@
       "description": "Rutas genéricas"
     }
   ],
-  "schemes": "https",
+  "schemes": "http",
   "securityDefinitions": {
     "bearerAuth": {
       "type": "apiKey",
